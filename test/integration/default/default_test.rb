@@ -11,6 +11,20 @@ unless os.windows?
 end
 
 # This is an example test, replace it with your own test.
-describe port(80), :skip do
-  it { should_not be_listening }
+describe port(80) do
+  it { should be_listening }
+end
+
+describe service "nginx" do
+  it { should be_running }
+  it { should be_enabled }
+end
+
+describe package('nodejs') do
+  it { should be_installed}
+  its ('version') { should cmp > '8.11.2*'}
+end
+
+describe npm("pm2") do
+  it { should be_installed }
 end
